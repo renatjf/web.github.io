@@ -1,6 +1,6 @@
-# estapa1
+# etapa1
 
-> Estapa 1
+> Etapa 1
 
 ## Build Setup
 

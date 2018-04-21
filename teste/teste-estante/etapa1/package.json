@@ -1,7 +1,7 @@
 {
-  "name": "estapa1",
+  "name": "etapa1",
   "version": "1.0.0",
-  "description": "Estapa 1",
+  "description": "Etapa 1",
   "author": "Renato Freitas <renatjf@gmail.com>",
   "private": true,
   "scripts": {
