@@ -25,8 +25,9 @@
       <button type="button" @click="addLista">Cadastrar</button>
       
       </b-form-group>
-      <ul v-if="lista.length" class="listaCadastro">        
-        <li v-for="todo in lista" :key="todo.id">          
+
+      <ul v-if="lista.length" class="listaCadastro">
+        <li v-for="todo in lista">          
           {{ todo.text }}
         </li>        
       </ul>
@@ -51,8 +52,10 @@ export default {
       endereco: {},
       lista: [],
       listaNaoEncontrada: false
+
     };
   },
+
   
   methods: {
     
