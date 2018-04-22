@@ -6,7 +6,7 @@
       <b-form-group
       label="<strong>CEP</strong>"
       >
-      <p class="erro">
+      <p class="erro" v-show="listaNaoEncontrada">
         Seu endereço não foi encontrado. <br />
         Cadastre manualmente.
       </p>
@@ -25,10 +25,10 @@
       <button type="button" @click="addLista">Cadastrar</button>
       
       </b-form-group>
-      <ul v-if="lista.length" class="listaCadastro">
-        <li v-for="todo in lista">          
+      <ul v-if="lista.length" class="listaCadastro">        
+        <li v-for="todo in lista" :key="todo.id">          
           {{ todo.text }}
-        </li>
+        </li>        
       </ul>
       <p v-else>Não existe lista cadastrada!</p>
       
@@ -50,13 +50,15 @@ export default {
       cep: '',      
       endereco: {},
       lista: [],
+      listaNaoEncontrada: false
     };
   },
   
   methods: {
     
     busca: function(){
-      const self = this;      
+      const self = this;
+      self.endereco = {};
       
       if(/^[0-9]{5}-[0-9]{3}$/.test(this.cep)){
         jQuery.getJSON("https://viacep.com.br/ws/" + this.cep + "/json/", function(endereco){
@@ -64,15 +66,16 @@ export default {
           $("input").css("display", "block");
           $("input").attr('disabled', true);
           $("#complemento").attr('disabled', false);
-          $("#complemento").focus();
-          $(".erro").css("display", "none");
+          $("#complemento").focus();          
           $("#cep").attr('disabled', false);
+          self.listaNaoEncontrada = false;
           if(endereco.erro){
             $("input").attr('disabled', false);
-            $("#cep").focus();
-            $(".erro").css("display", "block");
+            $("#cep").focus();            
+            self.listaNaoEncontrada = true;
             return;
-          }          
+          };
+          
         });
       }
     },
@@ -166,6 +169,5 @@ button:hover {
 .erro {
   font-size: 12px;
   color: red;
-  display: none;
 }
 </style>
